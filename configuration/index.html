@@ -284,9 +284,49 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#databases" title="Databases" class="md-nav__link">
+    Databases
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" title="SQLite" class="md-nav__link">
+    SQLite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres" title="Postgres" class="md-nav__link">
+    Postgres
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#caching" title="Caching" class="md-nav__link">
     Caching
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-memory" title="In-Memory" class="md-nav__link">
+    In-Memory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -403,9 +443,49 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#databases" title="Databases" class="md-nav__link">
+    Databases
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" title="SQLite" class="md-nav__link">
+    SQLite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres" title="Postgres" class="md-nav__link">
+    Postgres
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#caching" title="Caching" class="md-nav__link">
     Caching
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-memory" title="In-Memory" class="md-nav__link">
+    In-Memory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -460,18 +540,18 @@
 </tr>
 <tr>
 <td>ui.enabled</td>
-<td>Enable UI and docs</td>
+<td>Enable UI and API docs</td>
 <td>true</td>
 </tr>
 <tr>
-<td>cache.enabled</td>
-<td>Enable caching</td>
+<td>cache.memory.enabled</td>
+<td>Enable in-memory caching</td>
 <td>false</td>
 </tr>
 <tr>
-<td>cache.size</td>
-<td>Number of items cache can hold</td>
-<td>250</td>
+<td>cache.memory.items</td>
+<td>Number of items in-memory cache can hold</td>
+<td>500</td>
 </tr>
 <tr>
 <td>server.host</td>
@@ -489,14 +569,9 @@
 <td>9000</td>
 </tr>
 <tr>
-<td>db.name</td>
-<td>The name given to the Flipt database (suffixed with .db)</td>
-<td>flipt</td>
-</tr>
-<tr>
-<td>db.path</td>
-<td>Where to store the Flipt database</td>
-<td>/var/opt/flipt</td>
+<td>db.url</td>
+<td>URL to access Flipt database</td>
+<td>file:/var/opt/flipt/flipt.db</td>
 </tr>
 <tr>
 <td>db.migrations.auto</td>
@@ -525,27 +600,52 @@
   <span class="nt">grpc_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9000</span>
 
 <span class="nt">db</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">flipt</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/opt/flipt</span>
+  <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">file:/var/opt/flipt/flipt.db</span>
 </pre></div>
 
 
 <p>You can override them using:</p>
 <div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">FLIPT_SERVER_GRPC_PORT</span><span class="o">=</span><span class="m">9001</span>
-<span class="nb">export</span> <span class="nv">FLIPT_DB_NAME</span><span class="o">=</span>my-db
-<span class="nb">export</span> <span class="nv">FLIPT_DB_PATH</span><span class="o">=</span>/tmp/db
+<span class="nb">export</span> <span class="nv">FLIPT_DB_URL</span><span class="o">=</span><span class="s2">&quot;postgres://postgres@localhost:5432/flipt?sslmode=disable&quot;</span>
 </pre></div>
 
 
+<h2 id="databases">Databases</h2>
+<p>Flipt supports both <a href="https://www.sqlite.org/index.html">SQLite</a> and <a href="https://www.postgresql.org/">Postgres</a> databases as of <code>v0.5.0</code>.</p>
+<p>SQLite is enabled by default for simplicity, however you should use Postgres if you intend to run multiple copies of Flipt in a high availability configuration.</p>
+<p>The database connection can be configured as follows:</p>
+<h3 id="sqlite">SQLite</h3>
+<div class="codehilite"><pre><span></span><span class="nt">db</span><span class="p">:</span>
+  <span class="c1"># file: informs flipt to use SQLite</span>
+  <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">file:/var/opt/flipt/flipt.db</span>
+</pre></div>
+
+
+<h3 id="postgres">Postgres</h3>
+<div class="codehilite"><pre><span></span><span class="nt">db</span><span class="p">:</span>
+  <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">postgres://postgres@localhost:5432/flipt?sslmode=disable</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Postgres database must exist and be up and running before Flipt will be able to connect to it.</p>
+</div>
 <h2 id="caching">Caching</h2>
+<h3 id="in-memory">In-Memory</h3>
 <p>In-memory caching is currently only available for flags. When enabled, in-memory caching has been shown to speed up the fetching of individual flags by 10x.</p>
 <p>To enable caching set the following in your config:</p>
 <div class="codehilite"><pre><span></span><span class="nt">cache</span><span class="p">:</span>
-  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">memory</span><span class="p">:</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 
 
 <p>Work is planned to add caching support to rule evaluation soon.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Enabling in-memory caching when running more that one instance of Flipt is not advised as it will lead to unpredictable results.</p>
+</div>
 <h2 id="authentication">Authentication</h2>
 <p>Flipt currently has no built in authentication, authorization or encryption as Flipt was designed to work inside your trusted architecture and not be exposed publicly.</p>
 <p>If you do wish to expose the Flipt dashboard and REST API publicly using HTTP Basic Authentication, you can do so by using a reverse proxy. There is an <a href="https://github.com/markphelps/flipt/tree/master/examples/auth">example</a> provided in the GitHub repository showing how this could work.</p>

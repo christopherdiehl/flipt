@@ -241,6 +241,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#beta-software" title="Beta Software" class="md-nav__link">
+    Beta Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#flipt-features" title="Flipt Features" class="md-nav__link">
     Flipt Features
   </a>
@@ -410,6 +417,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#beta-software" title="Beta Software" class="md-nav__link">
+    Beta Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#flipt-features" title="Flipt Features" class="md-nav__link">
     Flipt Features
   </a>
@@ -469,13 +483,15 @@
 <p>This means that you can deploy Flipt within your existing infrastructure and not have to worry about your information being sent to a third party or the latency required to communicate across the internet.</p>
 <p>Flipt includes native client SDKs as well as a REST API so you can choose how to best integrate Flipt with your applications.</p>
 <p>For more on Flipt and it's concepts, take a look at the <a href="concepts/">Concepts</a> documentation.</p>
+<h2 id="beta-software">Beta Software</h2>
+<p>Flipt is still considered beta software until the 1.0 release. This means that there are likely bugs and features/configuration may change between releases. Attempts will be made to maintain backwards compatibility whenever possible.</p>
 <h2 id="flipt-features">Flipt Features</h2>
 <p>Flipt enables you to add <a href="https://martinfowler.com/bliki/FeatureToggle.html">feature flag</a> support to your existing applications, with a simple, single UI and API.</p>
 <p>This can range from simple on/off feature flags to more advanced use cases where you want to be able to rollout different versions of a feature to percentages of your users.</p>
 <p>Flipt features include:</p>
 <ul>
 <li>Fast. Written in Go. Optimized for performance</li>
-<li>Stand alone, easy to run server with no external dependencies</li>
+<li>Stand alone, easy to run and configure</li>
 <li>Ability to create advanced distribution rules to target segments of users</li>
 <li>Native GRPC client SDKs to integrate with your applications</li>
 <li>Simple REST API</li>
@@ -496,7 +512,7 @@
 <ul>
 <li><strong>Security</strong>. No Flipt data leaves your servers and you don't have to open your systems to the outside world to communicate with Flipt. It all runs within your existing infrastructure.</li>
 <li><strong>Speed</strong>. Since Flipt is co-located with your existing services, you do not have to communicate across the internet to another application running on the other side of the world which can add excessive latency and slow down your applications.</li>
-<li><strong>Simplicity</strong>. Flipt is a single binary with no external dependencies. This means there is no database to manage or connect to, no clusters to configure, and data backup is as simple as copying a single file.</li>
+<li><strong>Simplicity</strong> Flipt is a single binary with no external dependencies by default.</li>
 </ul>
 <h2 id="whats-next">What's Next</h2>
 <p>Want to get up and running with Flipt? See <a href="getting_started">Getting Started</a>.</p>

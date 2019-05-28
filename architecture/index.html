@@ -296,13 +296,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sqlite" title="SQLite" class="md-nav__link">
-    SQLite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vuejs" title="Vue.js" class="md-nav__link">
     Vue.js
   </a>
@@ -494,13 +487,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sqlite" title="SQLite" class="md-nav__link">
-    SQLite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vuejs" title="Vue.js" class="md-nav__link">
     Vue.js
   </a>
@@ -571,7 +557,6 @@
 <li><a href="https://golang.org/">Go Programming Language</a></li>
 <li><a href="https://grpc.io/">gRPC</a></li>
 <li><a href="https://github.com/grpc-ecosystem/grpc-gateway/">gRPC Gateway</a></li>
-<li><a href="https://sqlite.org/index.html">SQLite</a></li>
 <li><a href="https://vuejs.org/">Vue.js</a></li>
 <li><a href="https://bulma.io/">Bulma</a></li>
 <li><a href="https://buefy.github.io/">Buefy</a></li>
@@ -592,14 +577,6 @@
 <p>While awesome, gRPC might not be for everyone. <a href="https://github.com/grpc-ecosystem/grpc-gateway/">gRPC Gateway</a> is a reverse-proxy server which translates a RESTful JSON API into gRPC. This allows Flipt to implement a REST API as well as the gRPC API described above.</p>
 <p>This means that the REST API follows the same codepaths as the gRPC service that Flipt implements, allowing for reduced bugs and a simpler architecture.</p>
 <p>The Flipt UI is also built on top of the REST API provided by gRPC gateway.</p>
-<h3 id="sqlite">SQLite</h3>
-<p>From the <a href="https://sqlite.org/">SQLite</a> documentation:</p>
-<blockquote>
-<p>SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. SQLite is the most used database engine in the world.</p>
-</blockquote>
-<p>Two of the major goals of Flipt are to be 1) Fast and 2) Self contained. SQLite allows us to accomplish both. By embedding the datastore 'within' the application, we eliminate the need to communicate to an external database. This results in faster performance with is required if putting calls to Flipt in the 'hotpath' of your applications.</p>
-<p>Using SQLite means that you do not need to run an additional client/server RDBMS such as Postgres or MySQL in order for Flipt to store and retrieve your data. This means it's easy to get up and running with Flipt without having to install any additional software.</p>
-<p>And since a SQLite database is just a file, you can easily backup your data using traditional file backup methods.</p>
 <h3 id="vuejs">Vue.js</h3>
 <p><a href="https://vuejs.org/">Vue.js</a> is a minimal, modern and performant JavaScript framework that makes it easy to implement reactive frontend applications such as the Flipt UI. Vue.js was chosen because of it's rich ecosystem as well as ease of use to get started.</p>
 <p>The Flipt UI is a Single Page Application (SPA) written in JavaScript using Vue.js, that communicates with with the Flipt backend over the Flipt REST API. This means that the UI uses the same API that end clients do, meaning that anything you can do with the Flipt API, you can do in the UI and vice versa.</p>
