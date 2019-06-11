@@ -39,7 +39,7 @@
 <p>Flipt uses Go 1.12 with <a href="https://github.com/golang/go/wiki/Modules">Go Modules</a> enabled. To reliably build Flipt, make sure you clone it to a location outside of your <code>$GOPATH</code> or set the environment variable <code>GO111MODULE=on</code>. For more info see: <a href="https://github.com/golang/go/wiki/Modules#how-to-install-and-activate-module-support">https://github.com/golang/go/wiki/Modules#how-to-install-and-activate-module-support</a>.</p>
 <h2 id="vagrant">Vagrant</h2>
 <p>You can also easily get started with a development environment running in a VM using <a href="https://www.vagrantup.com/">Vagrant</a> and <a href="https://www.virtualbox.org/wiki/Downloads">Virtual Box</a>.</p>
-<p>Once you have Vagrant and Virtual Box installed you can change into either the <code>build/ubuntu</code> or <code>build/centos</code> directories and run <code>vagrant up</code>.</p>
+<p>Once you have Vagrant and Virtual Box installed you can <code>cd</code> into either the <code>build/dev/ubuntu</code> or <code>build/dev/centos</code> directories and run <code>vagrant up</code>.</p>
 <p>This will provision a VM that installs the necessary dev dependencies and runs the Flipt test suite.</p>
 <p>Once the provisioning process is complete, run:</p>
 <div class="codehilite"><pre><span></span>$ vagrant ssh

@@ -27,13 +27,17 @@
 <h2 id="variants">Variants</h2>
 <p>Variants are options for flags. For example, if you have a flag <code>colorscheme</code> that determines which main colors your users see when they log in to your application, then possible variants could be include <code>blue</code>, <code>green</code> or <code>red</code>.</p>
 <p><img alt="Variants Example" src="../assets/images/concepts/01_variants.png?raw=true" title="Variant Example" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Variant keys must be unique for a given flag.</p>
+</div>
 <h2 id="segments">Segments</h2>
 <p>Segments allow you to split your userbase or audience up into predefined slices. This is a powerful feature that enables targeting groups to determine if a flag or variant applies to them.</p>
 <p>An example segment could be <code>new-users</code>.</p>
 <p><img alt="New Users Segment" src="../assets/images/concepts/02_segments.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Segments are global across the Flipt application, so they can be used with multiple flags.</p>
+<p>Segments are global across the Flipt application so they can be used with multiple flags.</p>
 </div>
 <h2 id="constraints">Constraints</h2>
 <p>Constraints allow you to determine which segment a given entity is a part of.</p>
