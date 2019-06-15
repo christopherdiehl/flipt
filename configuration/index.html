@@ -48,6 +48,16 @@
 <td>true</td>
 </tr>
 <tr>
+<td>cors.enabled</td>
+<td>Enable CORS support</td>
+<td>false</td>
+</tr>
+<tr>
+<td>cors.allowed_origins</td>
+<td>Sets Access-Control-Allow-Origin header on server</td>
+<td>"*" (all domains)</td>
+</tr>
+<tr>
 <td>cache.memory.enabled</td>
 <td>Enable in-memory caching</td>
 <td>false</td>
@@ -133,7 +143,7 @@
 <h2 id="migrations">Migrations</h2>
 <p>From time to time the Flipt database must be updated with new schema. To accomplish this, Flipt includes a <code>migrate</code> command that will run any pending database migrations for you.</p>
 <p>If Flipt is started and there are pending migrations, you will see the following error in the console:</p>
-<div class="codehilite"><pre><span></span>migrations pending, please run <span class="sb">`</span>flipt migrate<span class="sb">`</span>
+<div class="codehilite"><pre><span></span>migrations pending, please backup your database and run <span class="sb">`</span>flipt migrate<span class="sb">`</span>
 </pre></div>
 
 
