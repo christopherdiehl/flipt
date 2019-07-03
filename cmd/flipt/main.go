@@ -315,7 +315,6 @@ func execute() error {
 				api  = grpc_gateway.NewServeMux(grpc_gateway.WithMarshalerOption(grpc_gateway.MIMEWildcard, &grpc_gateway.JSONPb{OrigName: false}))
 				opts = []grpc.DialOption{grpc.WithInsecure()}
 			)
-
 			if err := pb.RegisterFliptHandlerFromEndpoint(ctx, api, fmt.Sprintf("%s:%d", cfg.Server.Host, cfg.Server.GRPCPort), opts); err != nil {
 				return errors.Wrap(err, "connecting to grpc server")
 			}
@@ -339,6 +338,7 @@ func execute() error {
 			r.Use(middleware.Compress(gzip.DefaultCompression))
 			r.Use(middleware.Heartbeat("/health"))
 			r.Use(middleware.Recoverer)
+			r.Use(cfg.Metrics.instrumentMiddleware)
 			r.Mount("/metrics", promhttp.Handler())
 			r.Mount("/api/v1", api)
 			r.Mount("/debug", middleware.Profiler())

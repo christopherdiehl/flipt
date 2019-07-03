@@ -6,6 +6,9 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/spf13/viper"
 )
 
@@ -16,6 +19,7 @@ type config struct {
 	Cache    cacheConfig    `json:"cache,omitempty"`
 	Server   serverConfig   `json:"server,omitempty"`
 	Database databaseConfig `json:"database,omitempty"`
+	Metrics  *metrics       `json:"metrics,omitempty"`
 }
 
 type uiConfig struct {
@@ -45,6 +49,40 @@ type serverConfig struct {
 type databaseConfig struct {
 	MigrationsPath string `json:"migrationsPath,omitempty"`
 	URL            string `json:"url,omitempty"`
+}
+
+type metrics struct {
+	requestCounter  *prometheus.CounterVec
+	requestDuration *prometheus.HistogramVec
+	responseSize    *prometheus.HistogramVec
+}
+
+func newMetrics() *metrics {
+	return &metrics{
+		requestCounter: promauto.NewCounterVec(
+			prometheus.CounterOpts{
+				Name: "prometheus_http_requests_total",
+				Help: "Counter of HTTP requests.",
+			},
+			[]string{"handler", "code"},
+		),
+		requestDuration: promauto.NewHistogramVec(
+			prometheus.HistogramOpts{
+				Name:    "prometheus_http_request_duration_seconds",
+				Help:    "Histogram of latencies for HTTP requests.",
+				Buckets: []float64{.1, .2, .4, 1, 3, 8, 20, 60, 120},
+			},
+			[]string{"handler"},
+		),
+		responseSize: promauto.NewHistogramVec(
+			prometheus.HistogramOpts{
+				Name:    "prometheus_http_response_size_bytes",
+				Help:    "Histogram of response size for HTTP requests.",
+				Buckets: prometheus.ExponentialBuckets(100, 10, 8),
+			},
+			[]string{"handler"},
+		),
+	}
 }
 
 func defaultConfig() *config {
@@ -77,7 +115,22 @@ func defaultConfig() *config {
 			URL:            "file:/var/opt/flipt/flipt.db",
 			MigrationsPath: "/etc/flipt/config/migrations",
 		},
+
+		Metrics: newMetrics(),
 	}
+}
+
+func (m *metrics) instrumentMiddleware(next http.Handler) http.HandlerFunc {
+	return promhttp.InstrumentHandlerCounter(
+		m.requestCounter,
+		promhttp.InstrumentHandlerDuration(
+			m.requestDuration,
+			promhttp.InstrumentHandlerResponseSize(
+				m.responseSize,
+				next,
+			),
+		),
+	)
 }
 
 const (
