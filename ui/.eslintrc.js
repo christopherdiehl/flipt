@@ -3,13 +3,17 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: "babel-eslint",
+    allowImportExportEverywhere: true,
+    ecmaVersion: 2017,
+    sourceType: 'module',
   },
   env: {
     browser: true,
     node: true
   },
   extends: [
+    "plugin:vue/base",
     'plugin:vue/recommended',
     'eslint:recommended',
     'plugin:prettier/recommended',
